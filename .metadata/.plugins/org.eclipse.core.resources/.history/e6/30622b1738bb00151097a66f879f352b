@@ -1,0 +1,28 @@
+package leetcode0116;
+
+import java.util.*;
+
+public class Solution {
+    public String getHint(String secret, String guess) {
+        int len = secret.length();
+    	int cow = 0;
+        int bull = 0;
+        char[] sec = secret.toCharArray();
+        char[] gue = guess.toCharArray();
+        
+        int tmp[] = new int[10];
+        for (char s : sec) {
+			tmp[Character.getNumericValue(s)]++;
+		}
+        
+        for (int i=0;i<len;i++){
+        	if(sec[i]==gue[i])bull++;
+        	if(tmp[Character.getNumericValue(sec[i])]>0){
+        		cow++;
+        		tmp[Character.getNumericValue(sec[i])]--;
+        	}
+        }
+        
+        return Integer.toString(bull)+'A'+Integer.toString(cow-bull)+'B';                
+    }
+}
